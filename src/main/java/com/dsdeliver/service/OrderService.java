@@ -21,7 +21,7 @@ public class OrderService {
 
 	@Autowired
 	private OrderRepository orderRepository;
-	
+
 	@Autowired
 	private ProductRepository productRepository;
 
@@ -36,19 +36,30 @@ public class OrderService {
 
 	@Transactional
 	public OrderDTO insert(OrderDTO orderDto) {
-		
-		Order order = new Order(null,orderDto.getAddress(),orderDto.getLatitude(),
-				orderDto.getLongitude(), Instant.now(), OrderStatus.PENDING);
-		
-		for(ProductDTO p : orderDto.getProducts()) {
+
+		Order order = new Order(null, orderDto.getAddress(), orderDto.getLatitude(), orderDto.getLongitude(),
+				Instant.now(), OrderStatus.PENDING);
+
+		for (ProductDTO p : orderDto.getProducts()) {
 			Product product = productRepository.getOne(p.getId());
 			order.getProducts().add(product);
 		}
-		
+
 		order = orderRepository.save(order);
 		return new OrderDTO(order);
-		
-		
 
 	}
+	
+	@Transactional
+	public OrderDTO setDelivered(Long id) {
+		Order order = orderRepository.getOne(id);
+		order.setStatus(OrderStatus.DELIVERED);
+		order = orderRepository.save(order);
+		
+		return new OrderDTO(order);
+		
+	}
+	
+	
+	
 }

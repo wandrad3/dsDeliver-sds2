@@ -1,4 +1,4 @@
-package com.devsuperior;
+package com.dsdeliver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

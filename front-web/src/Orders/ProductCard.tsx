@@ -1,0 +1,38 @@
+
+import { Product } from './Types';
+
+type Props = {
+    product: Product;
+}
+
+function formatPrice(price: number) {
+    const formatter = new Intl.NumberFormat('pt-br', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2
+
+    })
+    return formatter.format(price)
+}
+
+function ProductCard({ product }: Props) {
+    return (
+        <div className="order-card-container">
+            <h3 className="order-card-title">{product.name}</h3>
+            <img alt={product.name} src={product.imageUri} className="order-card-image" />
+            <h3 className="order-card-price">
+                {formatPrice(product.price)}
+            </h3>
+            <div className="ordeer-card-description">
+                {product.description}
+            </div>
+
+
+        </div>
+
+
+    )
+
+}
+
+export default ProductCard;

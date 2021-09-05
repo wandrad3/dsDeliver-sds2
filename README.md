@@ -1,4 +1,4 @@
-# dsDeliver-sds2
+# dsDelivery 🛵
 App de restaurante delivery
 
 app: https://dsdelivery-wes.netlify.app/
